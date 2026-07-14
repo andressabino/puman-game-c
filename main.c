@@ -98,7 +98,7 @@
               jugador->posicion_y = ny;
               mapper_set_char(mapa, nx, ny, 'P');     /* nuevo jugador */
           } else {
-              printf("¡Has sido atrapado por un oso polar!\n");
+              printf("¡Has sido atrapado por una foca!\n");
               break;   /* fin del juego */
           }
 
