@@ -72,7 +72,7 @@ void renderizar_mapa(char **mapa, int filas, int columnas,
                 imprime_personaje = 1;
             }
             if (!imprime_personaje && enemigo_presente(enemigos, i, j)) {
-                printf("🦭");
+                printf("🦈");
                 imprime_personaje = 1;
             }
             if (!imprime_personaje) {
