@@ -62,7 +62,7 @@ void inicializar_mapa(char **mapa, int filas, int columnas) {
 void renderizar_mapa(char **mapa, int filas, int columnas,
                       Jugador *jugador, ListaEnemigos *enemigos) {
     system("cls||clear");   /* limpiar pantalla (Windows | Linux/Mac) */
-    printf("Mapa: %dx%d  \\n", filas, columnas);
+    printf("Mapa: %dx%d  \n", filas, columnas);
     for (int i = 0; i < filas; i++) {
         for (int j = 0; j < columnas; j++) {
             /* Sobreimprimir el jugador y los enemigos */

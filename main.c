@@ -1,4 +1,4 @@
- /* main.c - Entrada, menú y bucle principal del juego PUMAN */
+
   #include "utils.h"
   #include "mapa.h"
   #include "agentes.h"
@@ -84,7 +84,7 @@
               default: continue;   /* tecla no válida */
           }
 
-          /* ¿Es un movimiento válido? */
+          /* ¿Es un movimiento válido? (no choca con pared) */
           if (es_valido(mapa, filas, filas, nx, ny)) {
               /* ¿Hay un ítem? */
               if (mapa[nx][ny] == '*') {
@@ -97,17 +97,30 @@
               jugador->posicion_x = nx;
               jugador->posicion_y = ny;
               mapper_set_char(mapa, nx, ny, 'P');     /* nuevo jugador */
-          } else {
-              printf("¡Has sido atrapado por un tiburón!\n");
-              break;   /* fin del juego */
+          }
+
+          /* ¿Colisión con algún enemigo al movernos hacia él? */
+          if (verificar_colision(jugador, enemigos)) {
+              mapper_set_char(mapa, jugador->posicion_x, jugador->posicion_y, '.');
+              jugador->posicion_x = -1; /* Desaparece */
+              jugador->posicion_y = -1;
+              renderizar_mapa(mapa, filas, filas, jugador, enemigos);
+              printf("Puntaje: %d  Tiempo: %ds  Items: %d\n", jugador->puntaje_final, jugador->tiempo_segundos, jugador->items_recolectados);
+              printf("\n¡Has sido atrapado por un tiburón!\n");
+              break;
           }
 
           /* Movimiento de enemigos (IA con BFS) */
           mover_enemigos(enemigos, mapa, filas, filas, jugador);
 
-          /* ¿Colisión con algún enemigo? */
+          /* ¿Colisión con algún enemigo después de que ellos se mueven? */
           if (verificar_colision(jugador, enemigos)) {
-              printf("¡Has sido atrapado!\n");
+              mapper_set_char(mapa, jugador->posicion_x, jugador->posicion_y, '.');
+              jugador->posicion_x = -1; /* Desaparece */
+              jugador->posicion_y = -1;
+              renderizar_mapa(mapa, filas, filas, jugador, enemigos);
+              printf("Puntaje: %d  Tiempo: %ds  Items: %d\n", jugador->puntaje_final, jugador->tiempo_segundos, jugador->items_recolectados);
+              printf("\n¡Has sido atrapado por un tiburón!\n");
               break;
           }
       }
