@@ -35,7 +35,7 @@ gcc *.c -o puman
 
  3. Controles
 Usa las teclas **W, A, S, D** seguido de **Enter** para moverte por el mapa de la universidad. 
-- 🐧 **Pingüino** (Tú)
+- 🐧 **Pingüino** (Jugador)
 - 🦈 **Tiburón** (Enemigo persiguiéndote por BFS)
 - 🎓 **Créditos** (Puntos que debes recoger)
 - 🧱 **Paredes** (Muros inquebrantables)
