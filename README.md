@@ -1,3 +1,5 @@
+Integrantes: Manuel Sabino, Diego Sandia,Andres Matheus.
+
  PUMAN — Casimiro sobreviviente
 
 Un videojuego interactivo en consola desarrollado en C , donde el jugador controla a  Casimiro (mascota de la universidad) para recolectar créditos académicos mientras escapa de tiburones hambrientos.
