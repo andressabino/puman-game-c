@@ -3,7 +3,7 @@
   #include "utils.h"
   #include <stdlib.h>
 
-  /* ---------- Creación y gestión de la lista ---------- */
+  
   ListaEnemigos *crear_lista_enemigos(void) {
       ListaEnemigos *l = malloc(sizeof(ListaEnemigos));
       if (!l) return NULL;
@@ -20,7 +20,7 @@
   }
 
   /* ---------- Movimiento de enemigos (BFS) ---------- */
-/* Remove duplicate cola functions */
+
 
   int bfs_distancia(char **mapa, int filas, int columnas, int start_x, int start_y, int target_x, int target_y) {
       if (start_x == target_x && start_y == target_y) return 0;
@@ -30,10 +30,7 @@
       char **visitado = crear_mapa(filas, columnas);
       if (!visitado) { liberar_cola(q); return 9999; }
 
-      /* Usaremos visitado para guardar distancias: inicializamos en -1. 
-         Pero como es un char**, no podemos usar -1 fácilmente sin un cast.
-         Mejor creamos una matriz int local o usamos char desde 0 a 100.
-         Como max es 6x6, el camino mas largo es 36. Podemos usar el char. */
+      
       for (int i = 0; i < filas; ++i)
           for (int j = 0; j < columnas; ++j) visitado[i][j] = -1;
 
@@ -97,9 +94,9 @@
               }
           }
 
-          /* Aplicar movimiento */
+          
           if (best_x != act->x || best_y != act->y) {
-              /* Borrar viejo rastro en el mapa visual si es que lo hay */
+              
               if (mapper_get_char(mapa, act->x, act->y) == 'O') {
                   mapper_set_char(mapa, act->x, act->y, '.');
               }
@@ -123,7 +120,7 @@
       return 0;
   }
 
-  /* ---------- Liberar lista completa ---------- */
+ 
   void liberar_lista_enemigos(ListaEnemigos *lista) {
       if (!lista) return;
       NodoEnemigo *n = lista->primero;

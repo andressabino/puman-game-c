@@ -3,7 +3,7 @@
 
   #include "utils.h"
 
-  /* Operaciones sobre la lista enlazada de enemigos */
+  
   ListaEnemigos *crear_lista_enemigos(void);
   void           agregar_enemigo      (ListaEnemigos *lista, int x, int y);
   void           mover_enemigos       (ListaEnemigos *lista,
@@ -15,4 +15,4 @@
                                       ListaEnemigos *enemigos);
   void           liberar_lista_enemigos (ListaEnemigos *lista);
 
-  #endif /* AGENTES_H */
+  #endif 

@@ -1,4 +1,3 @@
-/* mapa.c - Implementación del TAD mapa matricial */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,7 +7,7 @@
 
 int enemigo_presente(ListaEnemigos *enemigos, int x, int y);
 
-/* Asigna un mapa bidimensional de tamaño filas x columnas */
+
 char **crear_mapa(int filas, int columnas) {
     if (filas <= 0 || columnas <= 0) return NULL;
     char **mapa = malloc(filas * sizeof(char *));
@@ -16,7 +15,7 @@ char **crear_mapa(int filas, int columnas) {
     for (int i = 0; i < filas; i++) {
         mapa[i] = malloc(columnas * sizeof(char));
         if (!mapa[i]) {
-            /* liberar lo asignado hasta el punto de fallo */
+            
             for (int j = 0; j < i; j++) free(mapa[j]);
             free(mapa);
             return NULL;
@@ -25,7 +24,7 @@ char **crear_mapa(int filas, int columnas) {
     return mapa;
 }
 
-/* Libera toda la memoria asociada al mapa */
+
 void liberar_mapa(char **mapa, int filas) {
     if (!mapa) return;
     for (int i = 0; i < filas; i++) {
@@ -34,20 +33,20 @@ void liberar_mapa(char **mapa, int filas) {
     free(mapa);
 }
 
-/* Inicializa el mapa con paredes, espacios libres y algunos ítems */
+
 void inicializar_mapa(char **mapa, int filas, int columnas) {
     if (!mapa) return;
-    /* 1 = pared, . = vacío, * = ítem, P = jugador, O = oso */
+    
     for (int i = 0; i < filas; i++) {
         for (int j = 0; j < columnas; j++) {
             if (i == 0 || i == filas - 1 || j == 0 || j == columnas - 1) {
-                mapa[i][j] = '1';   /* pared */
+                mapa[i][j] = '1';  
             } else {
-                mapa[i][j] = '.';   /* espacio libre */
+                mapa[i][j] = '.';   
             }
         }
     }
-    /* Colocar algunos ítems aleatorios (máx 5) */
+    
     int max_items = (filas * columnas) / 8;
     for (int k = 0; k < max_items; k++) {
         int x = rand() % (filas - 2) + 1;
@@ -61,11 +60,11 @@ void inicializar_mapa(char **mapa, int filas, int columnas) {
 /* Renderizar el mapa en consola */
 void renderizar_mapa(char **mapa, int filas, int columnas,
                       Jugador *jugador, ListaEnemigos *enemigos) {
-    system("cls||clear");   /* limpiar pantalla (Windows | Linux/Mac) */
+    system("cls||clear");   
     printf("Mapa: %dx%d  \n", filas, columnas);
     for (int i = 0; i < filas; i++) {
         for (int j = 0; j < columnas; j++) {
-            /* Sobreimprimir el jugador y los enemigos */
+            
             int imprime_personaje = 0;
             if (jugador && i == jugador->posicion_x && j == jugador->posicion_y) {
                 printf("🐧");
@@ -77,21 +76,21 @@ void renderizar_mapa(char **mapa, int filas, int columnas,
             }
             if (!imprime_personaje) {
                 char c = mapa[i][j];
-                if (c == '1') printf("🧱");       /* pared */
-                else if (c == '.') printf("⬛"); /* vacío */
-                else if (c == '*') printf("🎓"); /* ítem */
-                else printf("%c ", c);            /* fallback */
+                if (c == '1') printf("🧱");       
+                else if (c == '.') printf("⬛"); 
+                else if (c == '*') printf("🎓"); 
+                else printf("%c ", c);            
             }
         }
         putchar('\n');
     }
 }
 
-/* Verificar si una casilla es transitable */
+
 int es_valido(char **mapa, int filas, int columnas, int x, int y) {
     if (!mapa) return 0;
     if (x < 0 || x >= filas || y < 0 || y >= columnas) return 0;
-    return mapa[x][y] != '1'; /* Todo lo que no sea pared es transitable */
+    return mapa[x][y] != '1'; 
 }
 
 /* Funciones utilitarias para manipular el mapa */

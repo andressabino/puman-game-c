@@ -1,4 +1,3 @@
-
   #include "utils.h"
   #include "mapa.h"
   #include "agentes.h"
@@ -12,7 +11,7 @@
       SetConsoleOutputCP(CP_UTF8);
       srand((unsigned)time(NULL));
 
-      /* ---------- Menú inicial ---------- */
+      
       char nombre[50];
       int filas;
       printf("=== Bienvenido a PUMAN ===\n");
@@ -53,11 +52,11 @@
           liberar_mapa(mapa, filas);
           return 1;
       }
-      /* Colocar algunos enemigos estáticos */
+      
       agregar_enemigo(enemigos, 1, 1);
       agregar_enemigo(enemigos, filas - 2, filas - 2);
 
-      /* ---------- Bucle de juego ---------- */
+      
       char tecla;
       while (1) {
           renderizar_mapa(mapa, filas, filas, jugador, enemigos);
@@ -66,14 +65,14 @@
                  jugador->tiempo_segundos,
                  jugador->items_recolectados);
           printf("Controles: WASD para mover, Q para salir\n");
-          tecla = getch();   /* getch() necesita <conio.h> */
+          tecla = getch();  
 
-          if (tecla == 'q' || tecla == 'Q') break;   /* salida */
+          if (tecla == 'q' || tecla == 'Q') break;   
 
-          /* Incrementar cronómetro */
+         
           ++jugador->tiempo_segundos;
 
-          /* Calcular nueva posición */
+          
           int nx = jugador->posicion_x;
           int ny = jugador->posicion_y;
           switch (tecla) {
@@ -81,28 +80,28 @@
               case 's': case 'S': nx++; break;
               case 'a': case 'A': ny--; break;
               case 'd': case 'D': ny++; break;
-              default: continue;   /* tecla no válida */
+              default: continue;   
           }
 
-          /* ¿Es un movimiento válido? (no choca con pared) */
+          
           if (es_valido(mapa, filas, filas, nx, ny)) {
-              /* ¿Hay un ítem? */
+              
               if (mapa[nx][ny] == '*') {
                   ++jugador->items_recolectados;
-                  mapper_set_item(mapa, nx, ny, '.');   /* eliminar ítem */
+                  mapper_set_item(mapa, nx, ny, '.');  
               }
-              /* Actualizar mapa */
+              
               mapper_set_char(mapa, jugador->posicion_x,
                               jugador->posicion_y, '.');
               jugador->posicion_x = nx;
               jugador->posicion_y = ny;
-              mapper_set_char(mapa, nx, ny, 'P');     /* nuevo jugador */
+              mapper_set_char(mapa, nx, ny, 'P');     
           }
 
-          /* ¿Colisión con algún enemigo al movernos hacia él? */
+          
           if (verificar_colision(jugador, enemigos)) {
               mapper_set_char(mapa, jugador->posicion_x, jugador->posicion_y, '.');
-              jugador->posicion_x = -1; /* Desaparece */
+              jugador->posicion_x = -1; 
               jugador->posicion_y = -1;
               renderizar_mapa(mapa, filas, filas, jugador, enemigos);
               printf("Puntaje: %d  Tiempo: %ds  Items: %d\n", jugador->puntaje_final, jugador->tiempo_segundos, jugador->items_recolectados);
@@ -110,13 +109,13 @@
               break;
           }
 
-          /* Movimiento de enemigos (IA con BFS) */
+          
           mover_enemigos(enemigos, mapa, filas, filas, jugador);
 
-          /* ¿Colisión con algún enemigo después de que ellos se mueven? */
+          
           if (verificar_colision(jugador, enemigos)) {
               mapper_set_char(mapa, jugador->posicion_x, jugador->posicion_y, '.');
-              jugador->posicion_x = -1; /* Desaparece */
+              jugador->posicion_x = -1; 
               jugador->posicion_y = -1;
               renderizar_mapa(mapa, filas, filas, jugador, enemigos);
               printf("Puntaje: %d  Tiempo: %ds  Items: %d\n", jugador->puntaje_final, jugador->tiempo_segundos, jugador->items_recolectados);
@@ -137,7 +136,7 @@
       mostrar_ranking(ranking, cant);
       guardar_ranking(ranking, cant);
 
-      /* ---------- Liberar recursos ---------- */
+      
       free(jugador);
       liberar_mapa(mapa, filas);
       liberar_lista_enemigos(enemigos);

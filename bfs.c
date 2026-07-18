@@ -1,7 +1,6 @@
 #include "bfs.h"
 #include <stdlib.h>
 
-/* ---------- Crear una cola vacía ---------- */
 Cola *crear_cola(void) {
     Cola *c = malloc(sizeof(Cola));
     if (!c) return NULL;
@@ -10,7 +9,7 @@ Cola *crear_cola(void) {
     return c;
 }
 
-/* ---------- Encolar ---------- */
+
 void encolar(Cola *cola, int x, int y) {
     if (!cola) return;
     NodoCola *n = malloc(sizeof(NodoCola));
@@ -24,7 +23,7 @@ void encolar(Cola *cola, int x, int y) {
     }
 }
 
-/* ---------- Desencolar ---------- */
+
 NodoCola *desencolar(Cola *cola) {
     if (!cola || !cola->frente) return NULL;
     NodoCola *tmp = cola->frente;
@@ -33,7 +32,7 @@ NodoCola *desencolar(Cola *cola) {
     return tmp;
 }
 
-/* ---------- ¿Tiene elementos? ---------- */
+
 int tiene_elementos(Cola *cola) {
     return (cola && cola->frente) ? 1 : 0;
 }

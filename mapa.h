@@ -4,7 +4,7 @@
 
   #include "utils.h"
 
-  /* Declaraciones de la capa de mapa */
+  
   char **crear_mapa(int filas, int columnas);
   void   liberar_mapa(char **mapa, int filas);
   void   inicializar_mapa(char **mapa, int filas, int columnas);
@@ -15,4 +15,4 @@
   char   mapper_get_char(char **mapa, int x, int y);
   void   mapper_set_item(char **mapa, int x, int y, char c);
 
-  #endif /* MAPA_H */
+  #endif

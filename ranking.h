@@ -3,7 +3,7 @@
 
   #include "utils.h"
 
-  /* Lógica del ranking */
+  
   void           cargar_ranking       (RegistroRanking **registros,
                                       int            *cantidad);
   void           guardar_ranking      (RegistroRanking *registros,
@@ -18,4 +18,4 @@
                                       int             puntaje,
                                       int             tiempo);
 
-  #endif /* RANKING_H */
+  #endif 

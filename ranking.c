@@ -25,7 +25,7 @@
       fclose(f);
   }
 
-  /* ---------- Guardar ranking en archivo ---------- */
+  
   void guardar_ranking(RegistroRanking *registros, int cantidad) {
       FILE *f = fopen(RANKING_FILE, "w");
       if (!f) return;
@@ -38,19 +38,19 @@
       fclose(f);
   }
 
-  /* ---------- Ordenar con QuickSort (descendente por puntaje, ascendiente por tiempo en empate) */
+  
   static int comparar(const void *a, const void *b) {
       const RegistroRanking *ra = a;
       const RegistroRanking *rb = b;
-      if (ra->puntaje != rb->puntaje) return rb->puntaje - ra->puntaje;   /* mayor puntaje primero */
-      return ra->tiempo - rb->tiempo;                                    /* menor tiempo primero */
+      if (ra->puntaje != rb->puntaje) return rb->puntaje - ra->puntaje;   
+      return ra->tiempo - rb->tiempo;                                    
   }
 
   void ordenar_ranking(RegistroRanking *registros, int cantidad) {
       qsort(registros, (size_t)cantidad, sizeof(RegistroRanking), comparar);
   }
 
-  /* ---------- Mostrar ranking ---------- */
+  
   void mostrar_ranking(RegistroRanking *registros, int cantidad) {
       printf("\n=== RANKING ===\n");
       for (int i = 0; i < cantidad; ++i) {
@@ -62,13 +62,12 @@
       }
   }
 
-  /* ---------- Agregar un nuevo registro (y volver a ordenar) ---------- */
+  
   void agregar_registro(RegistroRanking **registros, int *cantidad,
                         const char *nombre, int puntaje, int tiempo) {
       if (!registros || !cantidad) return;
-      /* Crecer el arreglo si está lleno */
+      
       if (*cantidad == MAX_REGISTROS) {
-          /* En una versión real podríamos reallocar; aquí simplemente no añadimos más. */
           return;
       }
       RegistroRanking *tmp = realloc(*registros,
